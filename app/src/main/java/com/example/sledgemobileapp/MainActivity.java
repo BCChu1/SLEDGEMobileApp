@@ -16,6 +16,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void bluetoothCheck(View view) {
         TextView textView = findViewById(R.id.textView);
-        textView.setText("Hello!");
+        textView.setText("Hello! Test");
     }
 }
