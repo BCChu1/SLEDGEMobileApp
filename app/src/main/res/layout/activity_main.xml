@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/BluetoothCheckButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="bluetoothCheck"
@@ -20,10 +20,11 @@
         app:layout_constraintVertical_bias="0.289" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/ColorPickerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="LED Strip Setup"
+        android:onClick="goToCP"
+        android:text="Pick Color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -32,10 +33,11 @@
         app:layout_constraintVertical_bias="0.455" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/AnimationSelectButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Animation Setup"
+        android:onClick="goToAS"
+        android:text="Select Animation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
@@ -44,11 +46,11 @@
         app:layout_constraintVertical_bias="0.676" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/AdvancedCustomizationButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="nathanButton"
-        android:text="Nathan's button"
+        android:onClick="goToAC"
+        android:text="Advanced Customization"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
@@ -57,7 +59,7 @@
         app:layout_constraintVertical_bias="0.857" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/SLEDGETextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="S.L.E.D.G.E: \n Smart LED General Engine"
