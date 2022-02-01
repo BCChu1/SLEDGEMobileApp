@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Bluetooth_connection">
+
+    <ListView
+        android:id="@+id/pairedDeviceList"
+        android:layout_width="match_parent"
+        android:layout_height="590dp" />
+
+    <TextView
+        android:id="@+id/bluetoothStatusTextView"
+        android:layout_width="match_parent"
+        android:layout_height="255dp"
+        android:layout_weight="1"
+        android:text="TextView"
+        android:textSize="34sp" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="match_parent"
+        android:layout_height="131dp"
+        android:text='If you do not see "SLEDGE" here, then make sure you pair with the device in your settings'
+        android:textSize="20sp" />
+
+</LinearLayout>
