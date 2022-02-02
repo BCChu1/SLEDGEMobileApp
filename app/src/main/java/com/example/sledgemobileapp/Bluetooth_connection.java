@@ -1,11 +1,14 @@
 package com.example.sledgemobileapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.View;
@@ -23,10 +26,11 @@ public class Bluetooth_connection extends AppCompatActivity {
     TextView statusText;
     ListView deviceList;
     private BluetoothAdapter BTAdapter;
-    ArrayAdapter<String> PairedDevicesArrayAdapter;
+    private ArrayAdapter<String> PairedDevicesArrayAdapter;
     private BluetoothSocket skt = null;
     private OutputStream outStrm = null;
     private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+    final static int BLUETOOTH_PERMISSION_CODE = 420;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +38,20 @@ public class Bluetooth_connection extends AppCompatActivity {
         setContentView(R.layout.activity_bluetooth_connection);
         statusText = (TextView) findViewById(R.id.bluetoothStatusTextView);
 
-        PairedDevicesArrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_bluetooth_connection);
+        PairedDevicesArrayAdapter = new ArrayAdapter<String>(this, R.layout.device_name);
 
-        deviceList = (ListView) findViewById(R.id.pairedDeviceList);
+        ListView deviceList = (ListView) findViewById(R.id.pairedDeviceList);
         deviceList.setAdapter(PairedDevicesArrayAdapter);
         deviceList.setOnItemClickListener(mDeviceClickListener);
+        try {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.BLUETOOTH_CONNECT}, BLUETOOTH_PERMISSION_CODE );
+            }
+        } catch (SecurityException e) {
+            statusText.setText("Permission to use Bluetooth denied");
+        }
     }
+
     public void onResume() {
         super.onResume();
         checkBTState();
@@ -47,16 +59,26 @@ public class Bluetooth_connection extends AppCompatActivity {
         PairedDevicesArrayAdapter.clear();
         statusText.setText(" ");
         BTAdapter = BluetoothAdapter.getDefaultAdapter();
-        Set<BluetoothDevice> pairedDevices = BTAdapter.getBondedDevices();
-
-        if (pairedDevices.size() > 0) {
-            for (BluetoothDevice device : pairedDevices) {
-                PairedDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
+        try {
+            Set<BluetoothDevice> pairedDevices = BTAdapter.getBondedDevices();
+            if (pairedDevices.size() > 0) {
+                for (BluetoothDevice device : pairedDevices) {
+                    PairedDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
+                }
+            } else {
+                PairedDevicesArrayAdapter.add("No Devices Paired");
             }
-        } else {
-            PairedDevicesArrayAdapter.add("No Devices Paired");
+        } catch (SecurityException e){
+            statusText.setText("Error: couldn't retrieve linked devices");
         }
-
+    }
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch(requestCode) {
+            case BLUETOOTH_PERMISSION_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    break;
+                }
+        }
     }
 
     private void checkBTState() {
@@ -67,12 +89,23 @@ public class Bluetooth_connection extends AppCompatActivity {
         } else {
             if (!BTAdapter.isEnabled()) {
                 Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }
+                startActivity(enableIntent);
             }
         }
     }
 
     private AdapterView.OnItemClickListener mDeviceClickListener = new AdapterView.OnItemClickListener() {
-        public void onItemClick(AdapterView<?> av, View v,int arg2, long arg3) {
+        public void onItemClick(AdapterView<?> av, View v, int arg2, long arg3) {
             statusText.setText("Connecting...");
 
             String info = ((TextView) v).getText().toString();
@@ -87,6 +120,8 @@ public class Bluetooth_connection extends AppCompatActivity {
                 skt = device.createRfcommSocketToServiceRecord(MY_UUID);
             } catch (IOException e1) {
                 statusText.setText("Error: Could not create Bluetooth Socket");
+            } catch (SecurityException e2) {
+                statusText.setText("Error: Permission to create Bluetooth Socket denied");
             }
 
             try {           //connecting to socket
@@ -97,7 +132,10 @@ public class Bluetooth_connection extends AppCompatActivity {
                 } catch (IOException e2) {
                     statusText.setText("Error: Could not close Bluetooth Socket");
                 }
-            }
+
+            } catch (SecurityException e3) {
+                    statusText.setText("Error: Permission for Bluetooth Connection denied");
+                }
 
             try {       //establishing output stream
                 outStrm = skt.getOutputStream();
@@ -110,6 +148,8 @@ public class Bluetooth_connection extends AppCompatActivity {
             } catch (IOException e) {
                 statusText.setText("Error: Could not write to output stream");
             }
+
+
         }
     };
 }
