@@ -10,7 +10,7 @@
         android:id="@+id/BluetoothCheckButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="bluetoothCheck"
+        android:onClick="goToBC"
         android:text="Bluetooth Check"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

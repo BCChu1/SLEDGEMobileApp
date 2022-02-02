@@ -24,6 +24,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AdvancedCustomization.class);
         startActivity(intent);
     }
+    public void goToBC(View view) {
+        Intent intent = new Intent(this, Bluetooth_connection.class);
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
