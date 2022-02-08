@@ -106,6 +106,7 @@ public class Bluetooth_connection extends AppCompatActivity {
 
     private AdapterView.OnItemClickListener mDeviceClickListener = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView<?> av, View v, int arg2, long arg3) {
+            int error = 0;
             statusText.setText("Connecting...");
 
             String info = ((TextView) v).getText().toString();
@@ -118,37 +119,51 @@ public class Bluetooth_connection extends AppCompatActivity {
 
             try {       //creating socket
                 skt = device.createRfcommSocketToServiceRecord(MY_UUID);
+                statusText.append("Creating socket...");
             } catch (IOException e1) {
                 statusText.setText("Error: Could not create Bluetooth Socket");
+                error = 1;
             } catch (SecurityException e2) {
                 statusText.setText("Error: Permission to create Bluetooth Socket denied");
+                error = 1;
             }
 
             try {           //connecting to socket
                 skt.connect();
+                statusText.append("Connecting to socket...");
             } catch (IOException e) {
                 try {
                     skt.close();
                 } catch (IOException e2) {
                     statusText.setText("Error: Could not close Bluetooth Socket");
+                    error = 1;
                 }
 
             } catch (SecurityException e3) {
                     statusText.setText("Error: Permission for Bluetooth Connection denied");
+                    error = 1;
                 }
 
             try {       //establishing output stream
                 outStrm = skt.getOutputStream();
+                statusText.append("Creating output stream...");
             } catch (IOException e) {
                 statusText.setText("Error: Could not set up output stream");
+                error = 1;
             }
 
             try {
                 outStrm.write(testMsg);
+                statusText.append("Writing test output...");
             } catch (IOException e) {
                 statusText.setText("Error: Could not write to output stream");
+                error = 1;
             }
-
+            if (error == 0) {
+                statusText.append("Connected!");
+            } else {
+                blueToothAddress.address = "";
+            }
 
         }
     };
