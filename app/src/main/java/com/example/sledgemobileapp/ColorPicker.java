@@ -34,10 +34,11 @@ public class ColorPicker extends AppCompatActivity {
         setContentView(R.layout.activity_color_picker);
 
         // register the GFG text with appropriate ID
-        gfgTextView = findViewById(R.id.gfg_heading);
+        //gfgTextView = findViewById(R.id.gfg_heading);
 
         // register the GFG text with appropriate ID
         hexColorTextView = findViewById(R.id.hexColorText);
+        hexColorTextView.setTextColor(Color.BLACK);
 
         // register two of the buttons with their
         // appropriate IDs
@@ -107,6 +108,8 @@ public class ColorPicker extends AppCompatActivity {
                                                 // box to returned
                                                 // color
                                                 mColorPreview.setBackgroundColor(mDefaultColor);
+                                                String hexColor = "#" + Integer.toHexString(mDefaultColor);
+                                                hexColorTextView.setText(hexColor);
                                             }
                                         });
                     }
@@ -120,10 +123,8 @@ public class ColorPicker extends AppCompatActivity {
                     public void onClick(View v) {
                         // now change the value of the GFG text
                         // as well.
-                        gfgTextView.setTextColor(mDefaultColor);
+                        //gfgTextView.setBackgroundColor(mDefaultColor);
 
-                        String hexColor = "#" + Integer.toHexString(mDefaultColor);
-                        hexColorTextView.setText(hexColor);
 
                     }
                 });

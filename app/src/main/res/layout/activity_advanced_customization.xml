@@ -6,14 +6,297 @@
     android:layout_height="match_parent"
     tools:context=".AdvancedCustomization">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
-        android:text="Advanced Customization"
+    <Button
+        android:id="@+id/duelingbars_button"
+        android:layout_width="300dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:text="DuelingBars"
+        app:layout_constraintBottom_toTopOf="@+id/sinelon_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toEndOf="@+id/sinelon_toggleButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/sinelon_button"
+        android:layout_width="300dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="2dp"
+        android:text="Sinelon"
+        app:layout_constraintBottom_toTopOf="@+id/spectrum_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/PeakLerpObject_toggleButton2"
+        app:layout_constraintTop_toBottomOf="@+id/duelingbars_button" />
+
+    <Button
+        android:id="@+id/spectrum_button"
+        android:layout_width="300dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="1dp"
+        android:text="Spectrum"
+        app:layout_constraintBottom_toTopOf="@+id/fadeblock_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Spectrum_toggleButton3"
+        app:layout_constraintTop_toBottomOf="@+id/sinelon_button" />
+
+    <Button
+        android:id="@+id/fadeblock_button"
+        android:layout_width="300dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:text="FadeBlock"
+        app:layout_constraintBottom_toTopOf="@+id/gravityball_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/fadeblock_toggleButton4"
+        app:layout_constraintTop_toBottomOf="@+id/spectrum_button" />
+
+    <Button
+        android:id="@+id/gravityball_button"
+        android:layout_width="300dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:text="GravityBall"
+        app:layout_constraintBottom_toTopOf="@+id/tetris_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/gravityball_toggleButton5"
+        app:layout_constraintTop_toBottomOf="@+id/fadeblock_button" />
+
+    <Button
+        android:id="@+id/beatbar_button"
+        android:layout_width="300dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:text="BeatBar"
+        app:layout_constraintBottom_toTopOf="@+id/beatbar2_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/beatbar_toggleButton7"
+        app:layout_constraintTop_toBottomOf="@+id/tetris_button" />
+
+    <Button
+        android:id="@+id/beatbar2_button"
+        android:layout_width="300dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="1dp"
+        android:text="BeatBar2"
+        app:layout_constraintBottom_toTopOf="@+id/beatbar3_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/beatdetector_toggleButton8"
+        app:layout_constraintTop_toBottomOf="@+id/beatbar_button" />
+
+    <Button
+        android:id="@+id/zoomer_button"
+        android:layout_width="300dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:text="Zoomer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/zoomer_toggleButton11"
+        app:layout_constraintTop_toBottomOf="@+id/allbeatblocks_button" />
+
+    <Button
+        android:id="@+id/allbeatblocks_button"
+        android:layout_width="300dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="2dp"
+        android:text="All BeatBlocks"
+        app:layout_constraintBottom_toTopOf="@+id/zoomer_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/toggleButton10"
+        app:layout_constraintTop_toBottomOf="@+id/beatbar3_button" />
+
+    <Button
+        android:id="@+id/beatbar3_button"
+        android:layout_width="300dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:text="BeatBar3"
+        app:layout_constraintBottom_toTopOf="@+id/allbeatblocks_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/toggleButton9"
+        app:layout_constraintTop_toBottomOf="@+id/beatbar2_button" />
+
+    <Button
+        android:id="@+id/tetris_button"
+        android:layout_width="300dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="2dp"
+        android:text="Tetris"
+        app:layout_constraintBottom_toTopOf="@+id/beatbar_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/toggleButton6"
+        app:layout_constraintTop_toBottomOf="@+id/gravityball_button" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton10"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="2dp"
+        android:text="ToggleButton"
+        app:layout_constraintBottom_toTopOf="@+id/zoomer_toggleButton11"
+        app:layout_constraintEnd_toStartOf="@+id/allbeatblocks_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toggleButton9" />
+
+    <ToggleButton
+        android:id="@+id/zoomer_toggleButton11"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:text="ToggleButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/zoomer_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toggleButton10" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton9"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:text="ToggleButton"
+        app:layout_constraintBottom_toTopOf="@+id/toggleButton10"
+        app:layout_constraintEnd_toStartOf="@+id/beatbar3_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/beatdetector_toggleButton8" />
+
+    <ToggleButton
+        android:id="@+id/sinelon_toggleButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:text="ToggleButton"
+        app:layout_constraintBottom_toTopOf="@+id/PeakLerpObject_toggleButton2"
+        app:layout_constraintEnd_toStartOf="@+id/duelingbars_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ToggleButton
+        android:id="@+id/PeakLerpObject_toggleButton2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="2dp"
+        android:text="ToggleButton"
+        app:layout_constraintBottom_toTopOf="@+id/Spectrum_toggleButton3"
+        app:layout_constraintEnd_toStartOf="@+id/sinelon_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sinelon_toggleButton" />
+
+    <ToggleButton
+        android:id="@+id/Spectrum_toggleButton3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="1dp"
+        android:text="ToggleButton"
+        app:layout_constraintBottom_toTopOf="@+id/fadeblock_toggleButton4"
+        app:layout_constraintEnd_toStartOf="@+id/spectrum_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PeakLerpObject_toggleButton2" />
+
+    <ToggleButton
+        android:id="@+id/gravityball_toggleButton5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:text="ToggleButton"
+        app:layout_constraintBottom_toTopOf="@+id/toggleButton6"
+        app:layout_constraintEnd_toStartOf="@+id/gravityball_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fadeblock_toggleButton4" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton6"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="2dp"
+        android:text="ToggleButton"
+        app:layout_constraintBottom_toTopOf="@+id/beatbar_toggleButton7"
+        app:layout_constraintEnd_toStartOf="@+id/tetris_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gravityball_toggleButton5" />
+
+    <ToggleButton
+        android:id="@+id/beatbar_toggleButton7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:text="ToggleButton"
+        app:layout_constraintBottom_toTopOf="@+id/beatdetector_toggleButton8"
+        app:layout_constraintEnd_toStartOf="@+id/beatbar_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toggleButton6" />
+
+    <ToggleButton
+        android:id="@+id/beatdetector_toggleButton8"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="1dp"
+        android:text="ToggleButton"
+        app:layout_constraintBottom_toTopOf="@+id/toggleButton9"
+        app:layout_constraintEnd_toStartOf="@+id/beatbar2_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/beatbar_toggleButton7" />
+
+    <ToggleButton
+        android:id="@+id/fadeblock_toggleButton4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:text="ToggleButton"
+        app:layout_constraintBottom_toTopOf="@+id/gravityball_toggleButton5"
+        app:layout_constraintEnd_toStartOf="@+id/fadeblock_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Spectrum_toggleButton3" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="duelingbars_button,sinelon_button,spectrum_button,fadeblock_button,gravityball_button,beatbar_button,beatbar2_button,zoomer_button,allbeatblocks_button,beatbar3_button,tetris_button,toggleButton10,zoomer_toggleButton11,toggleButton9,sinelon_toggleButton,PeakLerpObject_toggleButton2,Spectrum_toggleButton3,gravityball_toggleButton5,toggleButton6,beatbar_toggleButton7,beatdetector_toggleButton8,fadeblock_toggleButton4"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="duelingbars_button,sinelon_button,spectrum_button,fadeblock_button,gravityball_button,beatbar_button,beatbar2_button,zoomer_button,allbeatblocks_button,beatbar3_button,tetris_button,toggleButton10,zoomer_toggleButton11,toggleButton9,sinelon_toggleButton,PeakLerpObject_toggleButton2,Spectrum_toggleButton3,gravityball_toggleButton5,toggleButton6,beatbar_toggleButton7,beatdetector_toggleButton8,fadeblock_toggleButton4"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
