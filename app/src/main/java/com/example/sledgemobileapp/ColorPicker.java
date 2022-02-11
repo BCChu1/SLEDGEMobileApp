@@ -109,6 +109,7 @@ public class ColorPicker extends AppCompatActivity {
                                                 // color
                                                 mColorPreview.setBackgroundColor(mDefaultColor);
                                                 String hexColor = "#" + Integer.toHexString(mDefaultColor);
+
                                                 hexColorTextView.setText(hexColor);
                                             }
                                         });
