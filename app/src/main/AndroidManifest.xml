@@ -32,7 +32,7 @@
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".AnimationSelect"
+            android:name=".PresetSelect"
             android:exported="false"
             android:label="@string/title_activity_animation_select"
             android:parentActivityName=".MainActivity">
