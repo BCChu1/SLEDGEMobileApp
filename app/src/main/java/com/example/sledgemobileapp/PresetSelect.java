@@ -7,6 +7,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -31,6 +32,7 @@ public class PresetSelect extends AppCompatActivity {
     private BluetoothSocket BTSocket = null;
     private OutputStream outputStream = null;
     private BluetoothDevice device = null;
+    public static int START_CREATE_PRESET = 1;
     private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     public String BTAddress = "";
     //above is bluetooth stuff
@@ -72,8 +74,7 @@ public class PresetSelect extends AppCompatActivity {
                 if (deleteMode) {
                     deletePresetFromFile(i);
                 } else {                                    //putting selected preset in list to potentially upload
-                    SingleLoadedList.animations.clear();
-                    SingleLoadedList.animationNames.clear();
+                    SingleLoadedList.clearAll();
                     SingleLoadedList.animations = presetList.get(i).animations;
                     SingleLoadedList.animationNames = presetList.get(i).animationNames;
                     builder = new AlertDialog.Builder(PresetSelect.this);
@@ -105,6 +106,7 @@ public class PresetSelect extends AppCompatActivity {
         super.onResume();
         adapter.notifyDataSetChanged();
         BTAddress = blueToothAddress.address;
+
         try {
             device = BTAdapter.getRemoteDevice(BTAddress);
         } catch (Exception e) {
@@ -139,6 +141,8 @@ public class PresetSelect extends AppCompatActivity {
             Toast.makeText(PresetSelect.this, "Error: Could not create output stream", Toast.LENGTH_SHORT).show();
         }
         sendData("x");
+
+
     }
 
     public void onPause() {
@@ -240,10 +244,11 @@ public class PresetSelect extends AppCompatActivity {
         }
         loadAllPresets();
     }
-    public void addPresetToFile(View v) {
-        //spawn new activty for setting preset name and add animations to preset
+    public void addPresetToFile() {
+        //spawn new activity for setting preset name and add animations to preset
         //get object returned
         //add to file and update
+
         try {
             FileOutputStream FOS = openFileOutput("Presets.txt", MODE_PRIVATE);
             ObjectOutputStream OOS = new ObjectOutputStream(FOS);
@@ -256,5 +261,22 @@ public class PresetSelect extends AppCompatActivity {
             Toast.makeText(PresetSelect.this, "Error: Can't write to preset file", Toast.LENGTH_SHORT).show();
         }
         loadAllPresets();
+    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {         //returning to Preset Select from Create Preset
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == START_CREATE_PRESET) {
+            preset.animations = SingleLoadedList.animations;
+            preset.animationNames = SingleLoadedList.animationNames;
+            preset.name = SingleLoadedList.newPresetName;
+            addPresetToFile();
+            SingleLoadedList.clearAll();
+            Toast.makeText(PresetSelect.this, "Successfully added a new preset!", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(PresetSelect.this, "1.Failed to add preset!", Toast.LENGTH_SHORT).show();
+        }
+    }
+    public void goToCP(View v) {
+        Intent intent = new Intent(this, CreatePreset.class);
+        startActivityForResult(intent, START_CREATE_PRESET);
     }
 }

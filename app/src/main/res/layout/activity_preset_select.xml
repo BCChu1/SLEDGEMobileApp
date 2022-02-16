@@ -26,8 +26,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="69dp"
         android:layout_marginBottom="24dp"
-        android:onClick="addPresetToFile"
-        android:text="ADD"
+        android:onClick="goToCP"
+        android:text="ADD NEW"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -37,6 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="69dp"
         android:layout_marginBottom="24dp"
+        android:onClick="deleteToggle"
         android:text="DELETE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

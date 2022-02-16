@@ -120,7 +120,10 @@ public class AdvancedCustomization extends AppCompatActivity {
         }
         //append new
 
-        SingleLoadedList.append(new_animation);
+        //SingleLoadedList.append(new_animation);
+        CreatePreset.addAnimationToPreset(new_animation);       //adding animation to this new preset
+
+
         Toast.makeText(AdvancedCustomization.this, name + "Animation Added", Toast.LENGTH_SHORT).show();
     }
 }

@@ -9,6 +9,8 @@ public class SingleLoadedList implements Serializable {
 
     private static SingleLoadedList instance = new SingleLoadedList();
 
+    public static String newPresetName = "";
+
     private SingleLoadedList(){}
 
     public static SingleLoadedList getInstance() {
@@ -23,5 +25,10 @@ public class SingleLoadedList implements Serializable {
     public void remove(int index) {
         animations.remove(index);
         animationNames.remove(index);
+    }
+    public static void clearAll() {
+        animations.clear();
+        animationNames.clear();
+        newPresetName = "";
     }
 }
