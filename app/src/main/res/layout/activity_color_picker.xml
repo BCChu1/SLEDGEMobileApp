@@ -31,97 +31,98 @@
 
         <TextView
             android:id="@+id/hexColorText"
-            android:layout_width="180dp"
-            android:layout_height="41dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
             android:text="0xFFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.943"
+            app:layout_constraintHorizontal_bias="0.731"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.623" />
+            app:layout_constraintVertical_bias="0.553" />
 
         <TextView
             android:id="@+id/hueColorText"
-            android:layout_width="199dp"
-            android:layout_height="118dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="0"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.075"
+            app:layout_constraintHorizontal_bias="0.153"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.738" />
+            app:layout_constraintVertical_bias="0.552" />
 
         <TextView
             android:id="@+id/hueColorTitleText"
-            android:layout_width="164dp"
-            android:layout_height="42dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
             android:text="Hue Color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.069"
+            app:layout_constraintHorizontal_bias="0.243"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.473" />
+            app:layout_constraintVertical_bias="0.372" />
 
         <TextView
             android:id="@+id/hexColorTitleText"
-            android:layout_width="164dp"
-            android:layout_height="42dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
             android:text="Hex Color"
             android:textColor="#757575"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.882"
+            app:layout_constraintHorizontal_bias="0.751"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.473" />
+            app:layout_constraintVertical_bias="0.371" />
 
         <Button
             android:id="@+id/set_color_button"
-            android:layout_width="203dp"
-            android:layout_height="94dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Set Color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.511"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.896" />
+            app:layout_constraintVertical_bias="0.678" />
 
         <View
             android:id="@+id/preview_selected_color_hue"
-            android:layout_width="167dp"
-            android:layout_height="51dp"
+            android:layout_width="150dp"
+            android:layout_height="38dp"
             android:layout_gravity="center"
             android:background="@android:color/darker_gray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.065"
+            app:layout_constraintHorizontal_bias="0.146"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.541" />
+            app:layout_constraintVertical_bias="0.448" />
 
         <View
             android:id="@+id/preview_selected_color_hex"
-            android:layout_width="177dp"
-            android:layout_height="58dp"
+            android:layout_width="150dp"
+            android:layout_height="38dp"
             android:layout_gravity="center"
             android:background="@android:color/darker_gray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.931"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.368"
+            app:layout_constraintStart_toEndOf="@+id/preview_selected_color_hue"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.536" />
+            app:layout_constraintVertical_bias="0.446" />
 
         <TextView
             android:id="@+id/textView"
@@ -134,19 +135,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.388" />
+            app:layout_constraintVertical_bias="0.245" />
 
         <Button
             android:id="@+id/pick_color_button"
-            android:layout_width="203dp"
-            android:layout_height="94dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Pick Color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.202" />
+            app:layout_constraintVertical_bias="0.112" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

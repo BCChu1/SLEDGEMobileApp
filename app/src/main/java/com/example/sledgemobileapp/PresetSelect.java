@@ -277,6 +277,7 @@ public class PresetSelect extends AppCompatActivity {
     }
     public void goToCP(View v) {
         Intent intent = new Intent(this, CreatePreset.class);
+        SingleLoadedList.clearAll();
         startActivityForResult(intent, START_CREATE_PRESET);
     }
 }
