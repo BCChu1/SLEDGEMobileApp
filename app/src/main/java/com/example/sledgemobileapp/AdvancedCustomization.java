@@ -122,9 +122,12 @@ public class AdvancedCustomization extends AppCompatActivity {
                                             // by the color
                                             // picker
                                             temp_color = color;
-                                            hexColor = "#" + Integer.toHexString(temp_color);
+                                            //hexColor = "#" + Integer.toHexString(temp_color);
 
-                                            current_animation.input_values[i] = temp_color;
+                                            float[] hsv = new float[3];
+                                            Color.colorToHSV(temp_color, hsv);
+
+                                            current_animation.input_values[i] = (int)hsv[0];
                                             variableNames.clear();
                                             for (int x = 0; x < current_animation.input_names.length; x++) {
                                                 variableNames.add(current_animation.input_names[x] + " : " + current_animation.input_values[x]);
