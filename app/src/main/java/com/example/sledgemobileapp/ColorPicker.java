@@ -16,13 +16,15 @@ public class ColorPicker extends AppCompatActivity {
     private TextView gfgTextView;
 
     private TextView hexColorTextView;
+    private TextView hueColorTextView;
 
     // two buttons to open color picker dialog and one to
     // set the color for GFG text
     private Button mSetColorButton, mPickColorButton;
 
     // view box to preview the selected color
-    private View mColorPreview;
+    private View mColorPreview_hue;
+    private View mColorPreview_hex;
 
     // this is the default color of the preview box
     private int mDefaultColor;
@@ -40,6 +42,9 @@ public class ColorPicker extends AppCompatActivity {
         hexColorTextView = findViewById(R.id.hexColorText);
         hexColorTextView.setTextColor(Color.BLACK);
 
+        hueColorTextView = findViewById(R.id.hueColorText);
+        hueColorTextView.setTextColor(Color.BLACK);
+
         // register two of the buttons with their
         // appropriate IDs
         mPickColorButton = findViewById(R.id.pick_color_button);
@@ -47,7 +52,8 @@ public class ColorPicker extends AppCompatActivity {
 
         // and also register the view which shows the
         // preview of the color chosen by the user
-        mColorPreview = findViewById(R.id.preview_selected_color);
+        mColorPreview_hex = findViewById(R.id.preview_selected_color_hex);
+        mColorPreview_hue = findViewById(R.id.preview_selected_color_hue);
 
         // set the default color to 0 as it is black
         mDefaultColor = 0;
@@ -107,10 +113,27 @@ public class ColorPicker extends AppCompatActivity {
                                                 // set the preview
                                                 // box to returned
                                                 // color
-                                                mColorPreview.setBackgroundColor(mDefaultColor);
+                                                mColorPreview_hex.setBackgroundColor(mDefaultColor);
+
+
                                                 String hexColor = "#" + Integer.toHexString(mDefaultColor);
 
                                                 hexColorTextView.setText(hexColor);
+
+
+                                                float[] hsv = new float[3];
+                                                int[] currentRGB;
+                                                currentRGB = getRGB(color);
+
+                                                //int R = (color >> 16) & 0xff;
+                                                //int G = (color >> 8) & 0xff;
+                                                //int B = (color) & 0xff;
+
+                                                Color.colorToHSV(color, hsv);
+                                                hueColorTextView.setText("HSV: " + hsv[0] + ", " + hsv[1] + ", " + hsv[2] + "\n" + "RGB:" + currentRGB[0] + ", " + currentRGB[1] + ", " + currentRGB[2]);
+
+                                                mColorPreview_hue.setBackgroundColor(Color.HSVToColor(hsv));
+
                                             }
                                         });
                     }
@@ -129,6 +152,13 @@ public class ColorPicker extends AppCompatActivity {
 
                     }
                 });
+    }
+
+    public static int[] getRGB(final int hex) {
+        int r = (hex & 0xFF0000) >> 16;
+        int g = (hex & 0xFF00) >> 8;
+        int b = (hex & 0xFF);
+        return new int[] {r, g, b};
     }
 
 

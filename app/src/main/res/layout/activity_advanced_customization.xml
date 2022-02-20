@@ -70,13 +70,14 @@
     <EditText
         android:id="@+id/editTextTextVariableValue"
         android:layout_width="135dp"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectableListy" />
+        app:layout_constraintTop_toBottomOf="@+id/selectableListy"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/variableNameText"

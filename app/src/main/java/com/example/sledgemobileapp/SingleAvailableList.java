@@ -43,7 +43,7 @@ public class SingleAvailableList {
         append(new animationInfo(15,"Dueling Bars", "Upper Start/Upper Size/Upper Color/Lower Start/Lower Size/ Lower Color/Period/Send Size"));
         append(new animationInfo(16, "Dueling Bar Sender", "Destination Index/Start/Direction/Period/Size"));
         append(new animationInfo(17, "BeatBar2","Band/Start/End/Locality/Color"));
-        append(new animationInfo(18,"beat bar 2 trail internal ignore", "dont use this"));
+        //append(new animationInfo(18,"beat bar 2 trail internal ignore", "dont use this"));
         append(new animationInfo(19,"Beat Block", "Start/End/Number of Blocks/ Base Color/Hit Color/Band/Num to Toggle"));
         append(new animationInfo(21, "Beat Zoom", "Start/End/Band/Color/Period"));
         append(new animationInfo(22,"Beat Bar 3","Start/End/Band/Color/Top"));

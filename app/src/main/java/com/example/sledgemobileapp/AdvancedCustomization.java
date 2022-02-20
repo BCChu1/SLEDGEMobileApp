@@ -3,6 +3,7 @@ package com.example.sledgemobileapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,12 +12,15 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.util.Log;
 
 import com.example.sledgemobileapp.SingleAvailableList;
 import com.example.sledgemobileapp.SingleLoadedList;
 import com.example.sledgemobileapp.animationInfo;
 
 import java.util.ArrayList;
+
+import top.defaults.colorpicker.ColorPickerPopup;
 
 public class AdvancedCustomization extends AppCompatActivity {
 
@@ -28,6 +32,9 @@ public class AdvancedCustomization extends AppCompatActivity {
     ArrayAdapter<String> editAdapter;
     animationInfo current_animation = null;
     int input_index = 0;
+    int temp_color = 0;
+    String hexColor = "#";
+    TextView user_input_color;
 
 
     @Override
@@ -40,6 +47,9 @@ public class AdvancedCustomization extends AppCompatActivity {
 
         loadedList = SingleLoadedList.getInstance();
         availableList = SingleAvailableList.getInstance();
+
+        user_input_color = findViewById(R.id.variableNameText);
+        user_input_color.setTextColor(Color.BLACK);
 
         ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, availableList.animationNames);
         editAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, variableNames);
@@ -67,6 +77,64 @@ public class AdvancedCustomization extends AppCompatActivity {
                 View text = findViewById(R.id.variableNameText);
                 TextView textview = (TextView) text;
                 textview.setText(current_animation.input_names[i]);
+
+                if(current_animation.input_names[i].contains("Color")) {
+                    new ColorPickerPopup.Builder(AdvancedCustomization.this).initialColor(
+                            Color.RED) // set initial color
+                            // of the color
+                            // picker dialog
+                            .enableBrightness(
+                                    true) // enable color brightness
+                            // slider or not
+                            .enableAlpha(
+                                    true) // enable color alpha
+                            // changer on slider or
+                            // not
+                            .okTitle(
+                                    "CHOOSE") // this is top right
+                            // Choose button
+                            .cancelTitle(
+                                    "CANCEL") // this is top left
+                            // Cancel button which
+                            // closes the
+                            .showIndicator(
+                                    true) // this is the small box
+                            // which shows the chosen
+                            // color by user at the
+                            // bottom of the cancel
+                            // button
+                            .showValue(
+                                    true) // this is the value which
+                            // shows the selected
+                            // color hex code
+                            // the above all values can be made
+                            // false to disable them on the
+                            // color picker dialog.
+                            .build()
+                            .show(
+                                    view,
+                                    new ColorPickerPopup.ColorPickerObserver() {
+                                        @Override
+                                        public void
+                                        onColorPicked(int color) {
+                                            // set the color
+                                            // which is returned
+                                            // by the color
+                                            // picker
+                                            temp_color = color;
+                                            hexColor = "#" + Integer.toHexString(temp_color);
+
+                                            current_animation.input_values[i] = temp_color;
+                                            variableNames.clear();
+                                            for (int x = 0; x < current_animation.input_names.length; x++) {
+                                                variableNames.add(current_animation.input_names[x] + " : " + current_animation.input_values[x]);
+                                            }
+                                            editAdapter.notifyDataSetChanged();
+
+                                        }
+                                    });
+
+                }
             }
         }));
     }
