@@ -16,7 +16,7 @@
         <activity
             android:name=".CreatePreset"
             android:exported="false"
-            android:label="Bluetooth Check"
+            android:label="Create Preset"
             android:parentActivityName=".PresetSelect" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

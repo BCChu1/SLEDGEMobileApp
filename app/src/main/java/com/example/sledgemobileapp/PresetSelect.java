@@ -34,6 +34,7 @@ public class PresetSelect extends AppCompatActivity {
     private BluetoothDevice device = null;
     public static int START_CREATE_PRESET = 1;
     private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+    blueToothAddress BTObject = blueToothAddress.getInstance();
     public String BTAddress = "";
     //above is bluetooth stuff
     ListView presetListview;                    //listview for presets
@@ -58,13 +59,13 @@ public class PresetSelect extends AppCompatActivity {
         preset.animations = SingleLoadedList.animations;
         preset.animationNames = SingleLoadedList.animationNames;
         //testing
-        preset.name = "Test";
+        //preset.name = "Test";
         //presetList.add(preset);
         //loadAllPresets();
         //presetNames.add("Test");
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,presetNames);
-        BTAdapter =BluetoothAdapter.getDefaultAdapter();
+        //BTAdapter =BluetoothAdapter.getDefaultAdapter();
 
         presetListview.setAdapter(adapter);
 
@@ -105,10 +106,12 @@ public class PresetSelect extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         adapter.notifyDataSetChanged();
-        BTAddress = blueToothAddress.address;
+        //BTAddress = blueToothAddress.address;
 
+        /*          //trying out a bluetooth class object like SingleAvailableList for better Bluetooth Consistency
         try {
             device = BTAdapter.getRemoteDevice(BTAddress);
+            //blueToothAddress.device = blueToothAddress.BTAdapter.getRemoteDevice(blueToothAddress.address);
         } catch (Exception e) {
             Toast.makeText(PresetSelect.this, "Error: Could not find device", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
@@ -116,23 +119,25 @@ public class PresetSelect extends AppCompatActivity {
         }
 
         try {
+
             BTSocket = device.createRfcommSocketToServiceRecord(MY_UUID);
         } catch (SecurityException e1) {
             Toast.makeText(PresetSelect.this, "Error: Could not create socket, permission denied", Toast.LENGTH_SHORT).show();
-        } catch (IOException e2) {
+        } catch (Exception e2) {
             Toast.makeText(PresetSelect.this, "Error: Could not make Bluetooth Socket", Toast.LENGTH_SHORT).show();
         }
 
         try {
             BTSocket.connect();
         } catch (IOException e1) {
+            Toast.makeText(PresetSelect.this, "Error: Could not connect to socket", Toast.LENGTH_SHORT).show();
             try {
                 BTSocket.close();
             } catch (IOException e2) {
                 Toast.makeText(PresetSelect.this, "Error: Could close Bluetooth Connection", Toast.LENGTH_SHORT).show();
             }
         } catch (SecurityException e2) {
-            Toast.makeText(PresetSelect.this, "Error: Not allowed to conect to socket", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PresetSelect.this, "Error: Not allowed to connect to socket", Toast.LENGTH_SHORT).show();
         }
 
         try {
@@ -140,6 +145,7 @@ public class PresetSelect extends AppCompatActivity {
         } catch (IOException e1) {
             Toast.makeText(PresetSelect.this, "Error: Could not create output stream", Toast.LENGTH_SHORT).show();
         }
+        */
         sendData("x");
 
 
@@ -147,11 +153,11 @@ public class PresetSelect extends AppCompatActivity {
 
     public void onPause() {
         super.onPause();
-        if (BTSocket == null) {
+        if (blueToothAddress.BTSocket == null) {
             return;
         }
         try {
-            BTSocket.close();
+            blueToothAddress.BTSocket.close();
         } catch (IOException e1) {
             statusText.setText("Error: Failed to close Bluetooth connection");
         }
@@ -159,23 +165,25 @@ public class PresetSelect extends AppCompatActivity {
 
     private void sendData(String message) {
         byte[] msgBuffer = message.getBytes();
+        //outputStream = blueToothAddress.outputStream;
         try {
-            if (outputStream != null) {
-                outputStream.write(msgBuffer);
+            //blueToothAddress.outputStream.flush();
+            if (blueToothAddress.outputStream != null) {
+                blueToothAddress.outputStream.write(msgBuffer);
                 statusText.setText("Sending data to SLEDGE...");
+                statusText.append("Data sent successfully!");
             } else {
                 Toast.makeText(PresetSelect.this, "Error: Output stream is null", Toast.LENGTH_SHORT).show();
             }
 
         } catch (IOException e) {
-            statusText.setText("Error: Failed to send data to SLEDGE! Please go back and do Bluetooth Check");
+            Toast.makeText(PresetSelect.this, "Error: Failed to send data to SLEDGE!", Toast.LENGTH_SHORT).show();
         }
-        statusText.setText("Data sent successfully!");
     }
     public void upload() {
         sendData("u");
         statusText.setText("");
-        statusText.setText("Uploading...");
+        //statusText.setText("Uploading...");
         for (animationInfo a : SingleLoadedList.animations) {
             sendData(String.valueOf(a.id) + "/");
 
@@ -189,7 +197,7 @@ public class PresetSelect extends AppCompatActivity {
             sendData(String.valueOf(a.input_values[a.input_values.length - 1]) + "/");
         }
         sendData("e");
-        statusText.append("Finished!");
+        Toast.makeText(PresetSelect.this, "Uploaded!", Toast.LENGTH_SHORT).show();
     }
     public void deleteToggle(View v) {
         if (deleteMode) {

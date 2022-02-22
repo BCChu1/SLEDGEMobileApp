@@ -20,43 +20,16 @@
         app:layout_constraintVertical_bias="0.289" />
 
     <Button
-        android:id="@+id/ColorPickerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="goToCP"
-        android:text="Pick Color"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.455" />
-
-    <Button
-        android:id="@+id/AnimationSelectButton"
+        android:id="@+id/PresetSelectButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="goToAS"
-        android:text="Select Animation"
+        android:text="Presets"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.676" />
-
-    <Button
-        android:id="@+id/AdvancedCustomizationButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="goToAC"
-        android:text="Advanced Customization"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.857" />
+        app:layout_constraintVertical_bias="0.46" />
 
     <TextView
         android:id="@+id/SLEDGETextView"

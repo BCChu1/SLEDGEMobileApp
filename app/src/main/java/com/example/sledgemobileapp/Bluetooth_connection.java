@@ -25,6 +25,7 @@ import java.util.UUID;
 public class Bluetooth_connection extends AppCompatActivity {
     TextView statusText;
     ListView deviceList;
+    protected blueToothAddress BTObject;
     private BluetoothAdapter BTAdapter;
     private ArrayAdapter<String> PairedDevicesArrayAdapter;
     private BluetoothSocket skt = null;
@@ -37,7 +38,7 @@ public class Bluetooth_connection extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bluetooth_connection);
         statusText = (TextView) findViewById(R.id.bluetoothStatusTextView);
-
+        BTObject = blueToothAddress.getInstance();
         PairedDevicesArrayAdapter = new ArrayAdapter<String>(this, R.layout.device_name);
 
         ListView deviceList = (ListView) findViewById(R.id.pairedDeviceList);
@@ -58,7 +59,7 @@ public class Bluetooth_connection extends AppCompatActivity {
 
         PairedDevicesArrayAdapter.clear();
         statusText.setText(" ");
-        BTAdapter = BluetoothAdapter.getDefaultAdapter();
+        blueToothAddress.BTAdapter = BluetoothAdapter.getDefaultAdapter();
         try {
             Set<BluetoothDevice> pairedDevices = BTAdapter.getBondedDevices();
             if (pairedDevices.size() > 0) {
@@ -82,7 +83,8 @@ public class Bluetooth_connection extends AppCompatActivity {
     }
 
     private void checkBTState() {
-        BTAdapter = BluetoothAdapter.getDefaultAdapter();
+        blueToothAddress.BTAdapter = BluetoothAdapter.getDefaultAdapter();
+        BTAdapter = blueToothAddress.BTAdapter;
         if (BTAdapter == null) {
             statusText.setText("Error: Device does not support Bluetooth");
             finish();
@@ -106,65 +108,73 @@ public class Bluetooth_connection extends AppCompatActivity {
 
     private AdapterView.OnItemClickListener mDeviceClickListener = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView<?> av, View v, int arg2, long arg3) {
-            int error = 0;
+            //int error = 0;
             statusText.setText("Connecting...");
 
             String info = ((TextView) v).getText().toString();
-            String address = info.substring(info.length() - 17);
+            //String address = info.substring(info.length() - 17);
 
-            blueToothAddress.address = address;
+            blueToothAddress.address = info.substring(info.length() - 17);
 
-            BluetoothDevice device = BTAdapter.getRemoteDevice(address);
+            blueToothAddress.device = BTAdapter.getRemoteDevice(blueToothAddress.address);
             byte[] testMsg = "x".getBytes();
 
             try {       //creating socket
-                skt = device.createRfcommSocketToServiceRecord(MY_UUID);
+                blueToothAddress.BTSocket = blueToothAddress.device.createRfcommSocketToServiceRecord(blueToothAddress.MY_UUID);
                 statusText.append("Creating socket...");
             } catch (IOException e1) {
                 statusText.setText("Error: Could not create Bluetooth Socket");
-                error = 1;
+                //error = 1;
+                blueToothAddress.resetBTConnection();
+                return;
             } catch (SecurityException e2) {
                 statusText.setText("Error: Permission to create Bluetooth Socket denied");
-                error = 1;
+                //error = 1;
+                blueToothAddress.resetBTConnection();
+                return;
             }
 
             try {           //connecting to socket
-                skt.connect();
+                blueToothAddress.BTSocket.connect();
                 statusText.append("Connecting to socket...");
             } catch (IOException e) {
                 try {
-                    skt.close();
+                    blueToothAddress.BTSocket.close();
                 } catch (IOException e2) {
                     statusText.setText("Error: Could not close Bluetooth Socket");
-                    error = 1;
+                    //error = 1;
+                    blueToothAddress.resetBTConnection();
+                    return;
                 }
 
             } catch (SecurityException e3) {
                     statusText.setText("Error: Permission for Bluetooth Connection denied");
-                    error = 1;
+                    //error = 1;
+                    blueToothAddress.resetBTConnection();
+                    return;
                 }
 
             try {       //establishing output stream
-                outStrm = skt.getOutputStream();
+                blueToothAddress.outputStream = blueToothAddress.BTSocket.getOutputStream();
                 statusText.append("Creating output stream...");
             } catch (IOException e) {
                 statusText.setText("Error: Could not set up output stream");
-                error = 1;
+                //error = 1;
+                blueToothAddress.resetBTConnection();
+                return;
             }
 
             try {
-                outStrm.write(testMsg);
+                blueToothAddress.outputStream.write(testMsg);
                 statusText.append("Writing test output...");
             } catch (IOException e) {
                 statusText.setText("Error: Could not write to output stream");
-                error = 1;
-            }
-            if (error == 0) {
-                statusText.append("Connected!");
-            } else {
-                blueToothAddress.address = "";
+                blueToothAddress.resetBTConnection();
+                //error = 1;
+                return;
             }
 
+            statusText.append("Connected!");
         }
     };
 }
