@@ -127,7 +127,7 @@ public class AdvancedCustomization extends AppCompatActivity {
                                             float[] hsv = new float[3];
                                             Color.colorToHSV(temp_color, hsv);
 
-                                            current_animation.input_values[i] = (int)hsv[0];
+                                            current_animation.input_values[i] = (int)(hsv[0]/360*255);
                                             variableNames.clear();
                                             for (int x = 0; x < current_animation.input_names.length; x++) {
                                                 variableNames.add(current_animation.input_names[x] + " : " + current_animation.input_values[x]);
